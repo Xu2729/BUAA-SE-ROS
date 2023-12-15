@@ -1,0 +1,34 @@
+<launch>
+  <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" />
+  <param name='/kinect2/qhd/image_color_rect/compressed/jpeg_quality' value='15'/>
+
+  <node pkg="Tus_g5" type="nav_control_node" name="nav_control_node" output="screen"/>
+
+    <node pkg="Tus_g5" type="nav_node" name="nav_node" output="screen" />
+    <node pkg="Tus_g5" type="start_rviz" name="start_rviz" output="screen" />
+    <!--node pkg="Tus_g5" type="shell_gazebo_node" name="shell_gazebo_node" output="screen" /-->
+
+<!--node pkg="waterplus_map_tools" type="my_nav" name="my_nav" output="screen" /-->
+<!--node pkg="waterplus_map_tools" type="my_nav_test" name="my_nav_test" output="screen" /-->
+
+<!--node pkg="waterplus_map_tools" type="my_nav_test" name="my_nav_test" output="screen" /-->
+<!--node pkg="waterplus_map_tools" type="retries" name="reties" output="screen" /-->
+
+
+  <!-- load the controllers of WPB_HOME -->
+  <include file="$(find wpr_simulation)/launch/wpb_home_controllers.launch"/>
+
+  <!-- wpb_home_grab_server -->
+  <node pkg="wpb_home_behaviors" type="wpb_home_grab_server" name="wpb_home_grab_server" />
+
+  <!-- wpb_home_objects_3d -->
+  <node pkg="wpb_home_behaviors" type="wpb_home_objects_3d" name="wpb_home_objects_3d" output="screen">
+    <param name="topic" type="string" value="/kinect2/sd/points"/>
+    <param name="start" type="bool" value="true"/>
+  </node>
+  <!-- wpb_home_grab_action -->
+  <node pkg="wpb_home_behaviors" type="wpb_home_grab_action" name="wpb_home_grab_action">
+    <rosparam file="$(find wpb_home_bringup)/config/wpb_home.yaml" command="load" />
+  </node>
+
+</launch>

@@ -1,0 +1,55 @@
+<launch>
+  <!--<node name="image_transport" pkg="image_transport" type="republish" args="compressed in:=/kinect2/qhd/image_color_rect raw out:=/kinect2/qhd/image_color_rect_compressed">
+    <parm name="/kinect2/qhd/image_color_rect/jpeg_quality" value="80"/>
+    <parm name="/kinect2/qhd/jpeg_quality" value="80"/>
+    <parm name="/kinect2/qhd/image_color_rect_compressed/jpeg_quality" value="15"/>
+    <parm name="/image_transport/compressed/jpeg_quality" value="15"/>
+    <parm name="/image_transport/jpeg_quality" value="80"/>
+  </node>-->
+  <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" />
+  <param name='/kinect2/qhd/image_color_rect/compressed/jpeg_quality' value='15'/>
+
+  <param name="/amcl/update_min_d" value="0.02"/>
+  <param name="/amcl/update_min_a" value="0.05"/>
+
+  <node pkg="Tus_g5" type="main_ctrl" name="main_ctrl" output="screen"/>
+  <node pkg="Tus_g5" type="map_ctrl" name="map_ctrl" output="screen"/>
+  <node pkg="Tus_g5" type="cur_pose" name="cur_pose" output="screen"/>
+  <node pkg="Tus_g5" type="nav_control_node" name="nav_control_node" output="screen"/>
+  <node pkg="Tus_g5" type="nav_node" name="nav_node" output="screen"/>
+  <node pkg="Tus_g5" type="nav_error" name="nav_error" output="screen"/>
+  <node pkg="Tus_g5" type="start_rviz" name="start_rviz" output="screen"/>
+  <node pkg="Tus_g5" type="transform_position" name="transform_position" output="screen"/>
+
+  <!--- Run Rplidar -->
+  <!-- <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+    <param name="serial_port"         type="string" value="/dev/rplidar"/>  
+    <param name="serial_baudrate"     type="int"    value="115200"/>
+    <param name="frame_id"            type="string" value="laser"/>
+    <param name="inverted"            type="bool"   value="false"/>
+    <param name="angle_compensate"    type="bool"   value="true"/>
+    <remap from="scan" to="scan_raw"/>
+  </node> -->
+
+  <!--- Run AMCL -->
+  <include file="$(find wpb_home_tutorials)/nav_lidar/amcl_omni.launch"/>
+    
+  <!-- Run lidar filter -->
+  <!-- <node pkg="wpb_home_bringup" type="wpb_home_lidar_filter" name="wpb_home_lidar_filter">
+    <param name="pub_topic" value="/scan"/>
+  </node> -->
+
+  <!-- joy node -->
+  <!-- <node respawn="true" pkg="joy" type="joy_node" name="wpb_home_joy" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="0.12" />
+  </node> -->
+
+  <!-- Axes Velcmd -->
+  <param name="axis_linear" value="1" type="int"/>
+  <param name="axis_angular" value="0" type="int"/>
+  <param name="scale_linear" value="1" type="double"/>
+  <param name="scale_angular" value="1" type="double"/>
+  <node pkg="wpb_home_bringup" type="wpb_home_js_vel" name="teleop"/>
+
+</launch>

@@ -1,0 +1,9 @@
+int32                   id
+int32                   type
+KeyBoardCtrlMsg         keyboard_ctrl_msg
+NavCtrlMsg              navigation_ctrl_msg
+string                  command
+---
+int32                   code
+string                  msg
+geometry_msgs/Pose      pose

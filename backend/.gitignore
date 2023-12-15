@@ -1,0 +1,7 @@
+/.idea
+/config.yaml
+/venv
+/*.png
+/*.jpg
+/compressed.py
+/face.py

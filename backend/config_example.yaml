@@ -1,0 +1,30 @@
+Debug: false # Set to true for development
+
+# Mysql
+DatabaseHost: xxx.xxx.xxx.xxx
+DatabasePort: 3306
+DatabaseUser: xxx
+DatabasePassword: "xxxxxx"
+DatabaseName: ros
+
+# Object Storage
+S3SecretId: xxx
+S3SecretKey: xxxxxx
+S3Address: xxx.xxx.xxx.xxx:xxxx
+S3Bucket: ros
+S3UseSSL: false
+
+# Django specific
+DjangoSecretKey: django-insecure-60%!4^0pw!e+1sh)&9c3)m8jb&ko3aeiun0@fnz1l$cui2i#sn
+
+# Ros
+ROSHost: xxx.xxx.xxx.xxx
+ROSPort: 9090
+
+# Detection
+FaceTolerance: 0.45
+FileSize: 131072
+FireSmokeCD: 180
+FaceCD: 300
+JPGQuality: 80
+ImageHW: 300000

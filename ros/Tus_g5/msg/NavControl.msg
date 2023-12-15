@@ -1,0 +1,10 @@
+int32                   op
+geometry_msgs/Pose[]    poses
+string[]                names
+string                  map_name
+int32                   loop
+int32                   direction
+float64                 speed
+string                  command
+float64                 arm_height
+int32                   arm_op

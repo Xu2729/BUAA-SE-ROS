@@ -1,0 +1,18 @@
+stages:
+  - build
+  - deploy
+
+build_main:
+  stage: build
+  only:
+    - backend-master
+  script:
+    - docker build -t "ros_backend:ci_job_$CI_PIPELINE_ID" .
+
+deploy_main:
+  stage: deploy
+  only:
+    - backend-master
+  script:
+    - docker stop ros_backend && docker rm ros_backend || true
+    - docker run --restart=unless-stopped --name=ros_backend -v /mnt/data/app-config/ros_config.yaml:/app/config.yaml -d -p 8500:8000 "ros_backend:ci_job_$CI_PIPELINE_ID"

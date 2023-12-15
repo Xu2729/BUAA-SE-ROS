@@ -1,0 +1,19 @@
+{
+  "extends": "@quasar/app-vite/tsconfig-preset",
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "allowJs": true
+  },
+  "allowImportingTsExtensions": true,
+  "jsx": "preserve",
+
+  "module": "ESNext",
+  "target": "esnext"
+}
